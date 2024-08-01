@@ -7,7 +7,7 @@ jobs:
   release:
     name: Release module
     if: github.event.pull_request.merged == true
-    runs-on: [ubuntnu-latest]
+    runs-on: ubuntnu-latest
 
     steps:
       - uses: actions/checkout@v4
