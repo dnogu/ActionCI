@@ -1,0 +1,59 @@
+name: Release Module
+
+jobs:
+  release:
+    name: Release module
+    if: github.event.pull_request.merged == true
+    runs-on: [ubuntnu-latest]
+
+    setps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get Previous tag
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 0.0.0
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Get next version
+        id: semvers
+        uses: "WyriHaximus/github-action-next-semvers@v1"
+        with:
+          version: ${{ steps.previoustag.outputs.tag }}
+
+      - name: Create release - major
+        if: contains(github.event.pull_request.labels.*.name, 'major')
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.semvers.outputs.major }}
+          release_name: ${{ github.event.pull_request.title }}
+          draft: false
+          prerelease: ${{contains(github.event.pull_request.labels.*.name, 'prerelease'), "true" || "false"}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release - minor
+        if: contains(github.event.pull_request.labels.*.name, 'minor')
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.semvers.outputs.minor }}
+          release_name: ${{ github.event.pull_request.title }}
+          draft: false
+          prerelease: ${{contains(github.event.pull_request.labels.*.name, 'prerelease'), "true" || "false"}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release - patch
+        if: contains(github.event.pull_request.labels.*.name, 'patch')
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.semvers.outputs.patch }}
+          release_name: ${{ github.event.pull_request.title }}
+          draft: false
+          prerelease: ${{contains(github.event.pull_request.labels.*.name, 'prerelease'), "true" || "false"}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
