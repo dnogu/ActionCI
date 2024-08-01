@@ -9,7 +9,7 @@ jobs:
     # if: github.event.pull_request.merged == true
     runs-on: [ubuntnu-latest]
 
-    setps:
+    steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
