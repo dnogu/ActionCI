@@ -6,7 +6,7 @@ on:
 jobs:
   release:
     name: Release module
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     runs-on: [ubuntnu-latest]
 
     setps:
