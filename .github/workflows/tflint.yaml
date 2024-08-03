@@ -1,4 +1,6 @@
-on: workflow_request
+on: 
+  workflow_call:
+
 name: tflint action
 jobs:
   lint:
