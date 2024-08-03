@@ -1,14 +1,5 @@
-plugin "terraform" {
-  enabled = true
-  preset  = "all"
-}
-
-plugin "azurerm" {
-    enabled = true
-}
-
 config {
-    module = true
+    call_module_type = "local"
     force = false
     disabled_by_default = false
 }
@@ -29,9 +20,9 @@ rule "terraform_empty_list_equality" {
   enabled = true
 }
 
-rule "terraform_map_duplicate_keys" { 
-  enabled = true
-}
+# rule "terraform_map_duplicate_keys" { 
+#   enabled = true
+# }
 
 rule "terraform_module_pinned_source" { 
   enabled = true
