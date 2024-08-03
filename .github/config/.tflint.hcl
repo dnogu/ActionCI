@@ -3,6 +3,10 @@ plugin "terraform" {
   preset  = "all"
 }
 
+plugin "azurerm" {
+    enabled = true
+}
+
 config {
     module = true
     force = false
