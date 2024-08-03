@@ -1,3 +1,7 @@
+plugin "terraform" {
+  enabled = true
+}
+
 config {
     module = true
     force = false
