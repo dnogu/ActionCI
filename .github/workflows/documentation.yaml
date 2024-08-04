@@ -17,4 +17,4 @@ jobs:
         output-file: README.md
         output-method: replace
         git-push: "true"
-        config-file: ".github/config/terraform-docs.yaml"
+        config-file: ".github/config/tf-readme.tpl"
