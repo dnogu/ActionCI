@@ -1,7 +1,7 @@
-on:
-  pull_request:
-    types:
-      - closed
+on: 
+  push:
+    # only trigger on branches, not on tags
+    branches: '**'
 
 jobs:
   tflint:
