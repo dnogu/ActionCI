@@ -12,7 +12,7 @@ jobs:
       id-token: write
     defaults:
       run:
-        working-directory: ${{ vars.TF_ACTIONS_WORKING_DIR }}
+        working-directory: ${{ secrets.TF_ACTIONS_WORKING_DIR }}
 
     steps:
     - uses: actions/checkout@v3
