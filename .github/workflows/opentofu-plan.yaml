@@ -12,13 +12,13 @@ jobs:
       id-token: write
     defaults:
       run:
-        working-directory: ${{ inputs.TF_ACTIONS_WORKING_DIR }}
+        working-directory: ${{ vars.TF_ACTIONS_WORKING_DIR }}
 
     steps:
     - uses: actions/checkout@v3
     - uses: opentofu/setup-opentofu@v1
       with:
-        tofu_version: ${{ inputs.OPEN_TOFU_VER }}
+        tofu_version: ${{ vars.OPEN_TOFU_VER }}
 
     - name: OpenTofu fmt
       id: fmt
