@@ -33,7 +33,7 @@ jobs:
 
     - name: OpenTofu Plan
       id: plan
-      run: tofu plan -no-color
+      run: tofu plan -no-color -out=tfplan
       continue-on-error: true
 
     - uses: actions/github-script@v6
@@ -72,3 +72,13 @@ jobs:
             repo: context.repo.repo,
             body: output
           })
+
+    - name: Wait for approval
+      if: github.event_name == 'workflow_dispatch'
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        event-type: approval-needed
+
+    - name: OpenTofu Apply
+      if: github.event_name == 'workflow_dispatch'
+      run: tofu apply -no-color tfplan
