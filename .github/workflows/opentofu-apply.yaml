@@ -24,7 +24,6 @@ jobs:
         working-directory: ${{ inputs.TF_ACTIONS_WORKING_DIR }}
 
     steps:
-    - run: mkdir -p artifacts
     - uses: actions/checkout@v3
     - uses: opentofu/setup-opentofu@v1
       with:
@@ -42,6 +41,8 @@ jobs:
     - name: OpenTofu Validate
       id: validate
       run: tofu validate -no-color
+
+    - run: mkdir -p artifacts
 
     - name: OpenTofu Plan
       id: plan
