@@ -24,6 +24,7 @@ jobs:
         working-directory: ${{ inputs.TF_ACTIONS_WORKING_DIR }}
 
     steps:
+    - run: mkdir -p artifacts
     - uses: actions/checkout@v3
     - uses: opentofu/setup-opentofu@v1
       with:
@@ -44,14 +45,14 @@ jobs:
 
     - name: OpenTofu Plan
       id: plan
-      run: tofu plan -no-color -out=tfplan.json
+      run: tofu plan -no-color -out=artifacts/tfplan.json
       continue-on-error: true
 
     - name: Upload TF Plan Artifact
       uses: actions/upload-artifact@v3
       with:
         name: tfplan
-        path: tfplan.json
+        path: artifacts/tfplan.json
 
     - name: Download TF Plan Artifact
       uses: actions/download-artifact@v4
