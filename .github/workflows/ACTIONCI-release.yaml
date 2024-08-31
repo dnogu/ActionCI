@@ -9,5 +9,5 @@ on:
 
 jobs:
   release:
-    uses: dnogu/ActionCI/.github/workflows/release.yaml@main
+    uses: dnogu/ActionCI/.workflow-templates/workflows/release.yaml@main
     secrets: inherit
