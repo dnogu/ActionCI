@@ -4,11 +4,11 @@ on:
   workflow_call:
     inputs:
       TF_ACTIONS_WORKING_DIR:
-        required: true
+        required: false
         type: string
         default: "./terraform"
       OPEN_TOFU_VER:
-        required: true
+        required: false
         type: string
         default: "latest"
 
