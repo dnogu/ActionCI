@@ -61,10 +61,11 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: tfplan
+        path: terraform/uploads/tfplan.json
 
     - name: Display structure of downloaded files
       run: ls -R
 
     - name: OpenTofu Apply
       if: github.event_name == 'workflow_dispatch'
-      run: tofu apply -no-color --auto-approve --from-plan=tfplan.json
+      run: tofu apply -no-color --auto-approve --from-plan=uploads/tfplan.json
