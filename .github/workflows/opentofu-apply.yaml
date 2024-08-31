@@ -42,24 +42,27 @@ jobs:
       id: validate
       run: tofu validate -no-color
 
-    - run: mkdir -p artifacts
+    - run: mkdir -p uploads
 
     - name: OpenTofu Plan
       id: plan
-      run: tofu plan -no-color -out=artifacts/tfplan.json
+      run: tofu plan -no-color -out=uploads/tfplan.json
       continue-on-error: true
 
     - name: Upload TF Plan Artifact
       uses: actions/upload-artifact@v3
       with:
         name: tfplan
-        path: terraform/artifacts/tfplan.json
+        path: terraform/uploads/tfplan.json
+
+    - run: mkdir -p downloads
 
     - name: Download TF Plan Artifact
       uses: actions/download-artifact@v4
       with:
         name: tfplan
+        path: terraform/downloads/tfplan.json
 
     - name: OpenTofu Apply
       if: github.event_name == 'workflow_dispatch'
-      run: tofu apply -no-color --auto-approve --from-plan=tfplan.json
+      run: tofu apply -no-color --auto-approve --from-plan=downloads/tfplan.json
