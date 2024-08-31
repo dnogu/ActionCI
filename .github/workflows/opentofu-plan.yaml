@@ -1,0 +1,48 @@
+name: OpenTofu
+
+on:
+  workflow_call:
+    inputs:
+      TF_ACTIONS_WORKING_DIR:
+        required: false
+        type: string
+        default: "./terraform"
+      OPEN_TOFU_VER:
+        required: false
+        type: string
+        default: "latest"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    defaults:
+      run:
+        working-directory: ${{ inputs.TF_ACTIONS_WORKING_DIR }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: opentofu/setup-opentofu@v1
+      with:
+        tofu_version: ${{ inputs.OPEN_TOFU_VER }}
+
+    - name: OpenTofu fmt
+      id: fmt
+      run: tofu fmt -check
+      continue-on-error: true
+
+    - name: OpenTofu Init
+      id: init
+      run: tofu init
+
+    - name: OpenTofu Validate
+      id: validate
+      run: tofu validate -no-color
+
+    - name: OpenTofu Plan
+      id: plan
+      run: tofu plan -no-color
+      continue-on-error: true
