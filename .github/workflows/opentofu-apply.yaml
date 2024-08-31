@@ -6,7 +6,7 @@ on:
       TF_ACTIONS_WORKING_DIR:
         required: false
         type: string
-        default: "./terraform"
+        default: "terraform"
       OPEN_TOFU_VER:
         required: false
         type: string
