@@ -51,13 +51,13 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: tfplan
-        path: ./
+        path: ./upload/
 
     - name: Download TF Plan Artifact
       uses: actions/download-artifact@v3
       with:
         name: tfplan
-        path: ./
+        path: ./download/
 
     - name: OpenTofu Apply
       if: github.event_name == 'workflow_dispatch'
