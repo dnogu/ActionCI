@@ -6,9 +6,11 @@ on:
       TF_ACTIONS_WORKING_DIR:
         required: true
         type: string
+        default: "./terraform"
       OPEN_TOFU_VER:
         required: true
         type: string
+        default: "latest"
 
 jobs:
   build:
