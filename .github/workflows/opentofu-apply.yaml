@@ -67,5 +67,5 @@ jobs:
       run: ls -R
 
     - name: OpenTofu Apply
-      if: github.event_name == 'workflow_dispatch'
+      # if: github.event_name == 'workflow_dispatch'
       run: tofu apply -no-color --auto-approve --from-plan=tfplan.json
