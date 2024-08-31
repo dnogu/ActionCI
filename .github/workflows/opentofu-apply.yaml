@@ -57,6 +57,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: tfplan
+        path: ./
 
     - name: OpenTofu Apply
       if: github.event_name == 'workflow_dispatch'
