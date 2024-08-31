@@ -61,7 +61,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: tfplan
-        path: terraform/uploads/tfplan.json
+        path: terraform/tfplan.json
 
     - name: Display structure of downloaded files
       run: ls -R
