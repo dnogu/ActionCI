@@ -2,6 +2,8 @@
 
 **ActionCI** is a suite of Continuous Integration (CI) tools designed for GitHub Actions, simplifying the process of setting up and maintaining CI pipelines.
 
+**Acknowledgment:** Most of the credit for this project goes to the authors of the individual GitHub Actions used within these workflows. This project builds upon their hard work, creating purpose-built, opinionated workflows to streamline CI processes.
+
 ## Features
 
 - **Custom Workflows**: Pre-built workflows for common CI tasks.
@@ -14,14 +16,6 @@
 
 - GitHub account
 - Basic knowledge of GitHub Actions
-
-### Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/dnogu/ActionCI.git
-```
 
 ## Usage
 
