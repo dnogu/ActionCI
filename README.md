@@ -15,14 +15,6 @@
 - GitHub account
 - Basic knowledge of GitHub Actions
 
-### Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/dnogu/ActionCI.git
-```
-
 ## Usage
 
 1. **Set up your workflow**: Include the provided workflows in your `.github/workflows` directory.
