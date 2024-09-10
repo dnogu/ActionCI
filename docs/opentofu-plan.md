@@ -21,6 +21,10 @@ jobs:
     with:
       TF_ACTIONS_WORKING_DIR: ${{ vars.TF_ACTIONS_WORKING_DIR }}
       OPEN_TOFU_VER: ${{ vars.OPEN_TOFU_VER }}
+      OIDC_AWS: True
+      AWS_AUTH_REGION: 'us-east-1'
+      AWS_ROLE_TO_ASSUME: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+      AWS_ROLE_SESSION_NAME: ${{ secrets.AWS_ROLE_SESSION_NAME }}
 ```
 ### Key Features
 
@@ -31,7 +35,7 @@ jobs:
 ## Workflow Overview
 
 ```yaml
-name: OpenTofu
+name: OpenTofu Plan
 
 on:
   workflow_call:
@@ -44,6 +48,22 @@ on:
         required: false
         type: string
         default: "latest"
+      OIDC_AWS:
+        required: false
+        type: boolean
+        default: False
+      AWS_AUTH_REGION:
+        required: false
+        type: string
+        default: "us-east-1"
+      AWS_ROLE_TO_ASSUME:
+        required: false
+        type: string
+        default: ""
+      AWS_ROLE_SESSION_NAME:
+        required: false
+        type: string
+        default: "MySessionName"
 
 jobs:
   build:
@@ -57,8 +77,19 @@ jobs:
         working-directory: ${{ inputs.TF_ACTIONS_WORKING_DIR }}
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: opentofu/setup-opentofu@v1
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      if: ${{ inputs.OIDC_AWS }} == True
+      with:
+        aws-region: ${{ inputs.AWS_AUTH_REGION }}
+        role-to-assume: ${{ inputs.AWS_ROLE_TO_ASSUME }}
+        role-session-name: ${{ inputs.AWS_ROLE_SESSION_NAME }}
+
+    - name: Setup OpenTofu
+      uses: opentofu/setup-opentofu@v1
       with:
         tofu_version: ${{ inputs.OPEN_TOFU_VER }}
 
@@ -79,6 +110,7 @@ jobs:
       id: plan
       run: tofu plan -no-color
       continue-on-error: true
+
 ```
 
 ## Credits
@@ -88,6 +120,9 @@ Special thanks to the following contributors who developed the components used i
 - **GitHub Actions Team**: For the official `Checkout` action, facilitating repository access.
   - Action used:
     - [`actions/checkout@v3`](https://github.com/actions/checkout)
+- **AWS for GitHub Actions**: For providing the setup action that authenticates GitHub Actions to AWS via OIDC.
+  - Action used:
+    - [`aws-actions/configure-aws-credentials@v4`](https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions)
 - **OpenTofu Team**: For providing the setup action that integrates OpenTofu with GitHub Actions.
   - Action used:
     - [`opentofu/setup-opentofu@v1`](https://github.com/opentofu/setup-opentofu)

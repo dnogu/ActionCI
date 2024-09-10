@@ -11,6 +11,22 @@ on:
         required: false
         type: string
         default: "latest"
+      OIDC_AWS:
+        required: true
+        type: boolean
+        default: false
+      AWS_AUTH_REGION:
+        required: false
+        type: string
+        default: "us-east-1"
+      AWS_ROLE_TO_ASSUME:
+        required: false
+        type: string
+        default: "placeholder_role"
+      AWS_ROLE_SESSION_NAME:
+        required: false
+        type: string
+        default: "MySessionName"
 
 jobs:
   build:
@@ -24,6 +40,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      if: ${{ inputs.OIDC_AWS == true }}
+      with:
+        aws-region: ${{ inputs.AWS_AUTH_REGION }}
+        role-to-assume: ${{ inputs.AWS_ROLE_TO_ASSUME }}
+        role-session-name: ${{ inputs.AWS_ROLE_SESSION_NAME }}
+
     - uses: opentofu/setup-opentofu@v1
       with:
         tofu_version: ${{ inputs.OPEN_TOFU_VER }}
