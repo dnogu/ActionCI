@@ -43,7 +43,7 @@ jobs:
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
-      if: ${{ inputs.OIDC_AWS }} == true
+      if: ${{ inputs.OIDC_AWS == true }}
       with:
         aws-region: ${{ inputs.AWS_AUTH_REGION }}
         role-to-assume: ${{ inputs.AWS_ROLE_TO_ASSUME }}
