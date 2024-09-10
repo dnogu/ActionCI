@@ -4,15 +4,15 @@ on:
   workflow_call:
     inputs:
       TF_ACTIONS_WORKING_DIR:
-        required: false
+        required: False
         type: string
         default: "./terraform"
       OPEN_TOFU_VER:
-        required: false
+        required: False
         type: string
         default: "latest"
       OIDC_AWS:
-        required: false
+        required: True
         type: boolean
         default: False
       AWS_AUTH_REGION:
@@ -20,11 +20,11 @@ on:
         type: string
         default: "us-east-1"
       AWS_ROLE_TO_ASSUME:
-        required: false
+        required: False
         type: string
         default: ""
       AWS_ROLE_SESSION_NAME:
-        required: false
+        required: False
         type: string
         default: "MySessionName"
 
@@ -48,7 +48,7 @@ jobs:
         aws-region: ${{ inputs.AWS_AUTH_REGION }}
         role-to-assume: ${{ inputs.AWS_ROLE_TO_ASSUME }}
         role-session-name: ${{ inputs.AWS_ROLE_SESSION_NAME }}
-        
+
     - uses: opentofu/setup-opentofu@v1
       with:
         tofu_version: ${{ inputs.OPEN_TOFU_VER }}
