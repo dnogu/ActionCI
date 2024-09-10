@@ -4,27 +4,27 @@ on:
   workflow_call:
     inputs:
       TF_ACTIONS_WORKING_DIR:
-        required: False
+        required: false
         type: string
         default: "./terraform"
       OPEN_TOFU_VER:
-        required: False
+        required: false
         type: string
         default: "latest"
       OIDC_AWS:
         required: True
         type: boolean
-        default: False
+        default: false
       AWS_AUTH_REGION:
         required: false
         type: string
         default: "us-east-1"
       AWS_ROLE_TO_ASSUME:
-        required: False
+        required: false
         type: string
         default: "placeholder_role"
       AWS_ROLE_SESSION_NAME:
-        required: False
+        required: false
         type: string
         default: "MySessionName"
 
@@ -43,7 +43,7 @@ jobs:
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
-      if: ${{ inputs.OIDC_AWS }} == True
+      if: ${{ inputs.OIDC_AWS }} == true
       with:
         aws-region: ${{ inputs.AWS_AUTH_REGION }}
         role-to-assume: ${{ inputs.AWS_ROLE_TO_ASSUME }}
