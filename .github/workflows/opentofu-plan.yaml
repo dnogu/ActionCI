@@ -22,7 +22,7 @@ on:
       AWS_ROLE_TO_ASSUME:
         required: False
         type: string
-        default: ""
+        default: "placeholder_role"
       AWS_ROLE_SESSION_NAME:
         required: False
         type: string
