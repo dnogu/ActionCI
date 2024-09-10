@@ -9,7 +9,7 @@ output:
   file: "README.md"
 
 sections:
-  hide: [requirements}
+  hide: [requirements]
 
 contents: |-
 
@@ -26,9 +26,9 @@ contents: |-
   '''
 
   {{ .Providers }}
-         
+
   {{ .Modules }}
-         
+
   {{ . Resources }}
 
   {{ .Inputs }}
