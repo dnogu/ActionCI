@@ -8,8 +8,4 @@
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] New deployment
 
-## Checklist
-
-- [ ] I have updated the necessary documentation
-
 ## Further comments
