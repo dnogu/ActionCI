@@ -46,7 +46,7 @@ jobs:
       if: ${{ inputs.OIDC_AWS == true }}
       with:
         aws-region: ${{ inputs.AWS_AUTH_REGION }}
-        role-to-assume: ${{ inputs.AWS_ROLE_TO_ASSUME }}
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         role-session-name: ${{ inputs.AWS_ROLE_SESSION_NAME }}
 
     - uses: opentofu/setup-opentofu@v1
