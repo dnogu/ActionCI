@@ -12,7 +12,7 @@ on:
         type: string
         default: "latest"
       OIDC_AWS:
-        required: true
+        required: false
         type: boolean
         default: false
       AWS_AUTH_REGION:
