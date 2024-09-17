@@ -31,6 +31,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       contents: read
       id-token: write
