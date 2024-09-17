@@ -35,7 +35,7 @@ jobs:
       contents: read
       id-token: write
     env:
-      TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+      TF_VAR_github_token: ${{ secrets.TF_GITHUB_TOKEN }}
     defaults:
       run:
         working-directory: ${{ inputs.TF_ACTIONS_WORKING_DIR }}
